@@ -34,7 +34,28 @@
             <div class="row center">
             	<h6 "" class="header col s4 light"></h6>
             	<h6 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')+ ' - ' + #dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s4 dark"></h6>
-     
+     	<div class="title">
+     	<div class="titlecontainer">
+     	 <span class="remain">
+                  <script th:inline="javascript">
+                  	/*<![CDATA[*/
+                  	var begin = /*[[${trip.start}]]*/ 'default';
+                  	/*]]>*/      
+                  </script>
+                  <script type="text/javascript" th:src="@{/jsp/daysuntil.js}"></script>
+                  </span>
+                 <span class="duration">
+                  <script th:inline="javascript">
+                  	/*<![CDATA[*/
+                  	var begin = /*[[${trip.start}]]*/ 'default';
+                  	var conclude = /*[[${trip.end}]]*/ 'default';
+                  	/*]]>*/      
+                  </script>
+                  <script type="text/javascript" th:src="@{/jsp/triplength.js}"></script>
+                  </span>
+                </span>
+                </div>
+                </div>
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
                  <h6 th:if="${!#strings.isEmpty(trip.destinations)}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
 
@@ -175,8 +196,20 @@
                         </li>
                     </ul>
                     
+                    <br>
                     
-                    <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="'Notes: ' + ${trip.notes}" class="header col s12 light"></p>
+                    <h4 class="header">
+                        Notes &nbsp
+                         <div class="collapsible-header">
+                         	 <i class="material-icons">event_note</i>
+                                <span class="badge" th:text="${trip.title}">4</span>
+
+                         </div>
+                        <div class="collapsible-body">
+                        	<p th:if="${!#strings.isEmpty(trip.notes)}" th:text="${trip.notes}"></p>
+                        </div>                            
+                    </h4>
+                    
                     
                 </div>
 			
